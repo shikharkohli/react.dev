@@ -19,11 +19,17 @@ function Square({ value, children, onSquareClick }: ButtonProps) {
 
 export default function Board() {
   const [boardState, setBoardState] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
   function handleClick(index) {
     const nextSquares = boardState.slice();
-    nextSquares[index] = "X";
+    if (xIsNext) {
+      nextSquares[index] = "X";
+    } else {
+      nextSquares[index] = "O";
+    }
     setBoardState(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
